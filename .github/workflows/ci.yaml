@@ -99,7 +99,7 @@ jobs:
             sysroot: common
             lto: thin
 
-          - os: macos-11
+          - os: macos-14
             arch: arm64
             toolchain: llvm
             config: release
@@ -256,9 +256,9 @@ jobs:
           EOF
 
       # Setup: hack-install busybox on macOS from ALARM mirror
-      - if:
+      - if: startsWith(matrix.os, 'macos')
         run: |
-          curl -s -L http://mirror.archlinuxarm.org/aarch64/extra/busybox-1.36.1-1-aarch64.pkg.tar.xz | \
+          curl -s -L http://mirror.archlinuxarm.org/aarch64/extra/busybox-1.36.1-2-aarch64.pkg.tar.xz | \
           tar xOzv usr/bin/busybox > $HOME/busybox-arm64
 
       # Setup: use llvm-brew on macOS
